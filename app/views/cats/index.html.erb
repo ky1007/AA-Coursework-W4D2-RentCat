@@ -1,0 +1,10 @@
+<h1>All of the BEST kitty cats in the world</h1>
+
+<ul>
+  <% @cats.each do |cat| %>
+    <li><%= cat.name %>:
+    <%= link_to "show me more about this cat!", cat_url(cat) %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Add a new kitty cat!", new_cat_url %>

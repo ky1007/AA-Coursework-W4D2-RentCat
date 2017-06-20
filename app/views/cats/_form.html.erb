@@ -1,0 +1,57 @@
+<!-- Things we have to change:
+    - Action
+    - Verb
+-->
+
+<% _action = cat.id ? cat_url(cat) : cats_url %>
+<% _verb = cat.id ? 'PATCH' : 'POST' %>
+
+<% if flash[:errors] %>
+  <ul>
+  <% flash[:errors].each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<form action="<%= _action %>" method="POST">
+  <input type='hidden' name='_method' value='<%= _verb %>'>
+
+  <label>Name:
+    <input type="text" name="cat[name]" value=" <%= cat.name %> " />
+  </label>
+
+  <br>
+
+  <label>Sex:
+    <label><input type="radio" name="cat[sex]" value="F" checked = "<%= cat.sex == "F" ? "checked" : "" %> " />F</label>
+    <label><input type="radio" name="cat[sex]" value="M" checked = "<%= cat.sex == "M" ? "checked" : "" %> "/>M</label>
+  </label>
+
+  <br>
+
+  <label>Color:
+    <select name="cat[color]" />
+      <option disabled>--Pick a color!!--</option>
+      <% Cat::COLOR.each do |color| %>
+        <option value="<%= color %>" <%= cat.color == color ? "selected" : "" %>> <%= color %> </option>
+      <% end %>
+    </select>
+  </label>
+
+  <br>
+
+  <label>Date:
+    <input type='date' name="cat[birth_date]" value= "<%= cat.birth_date %>" >
+  </label>
+
+  <br>
+
+  <label>Description:
+    <textarea name="cat[description]"> <%= cat.description %> </textarea>
+  </label>
+
+  <br>
+
+  <input type="submit" value="<%= _verb == "PATCH" ? "Edit this cat" : "Add this cat" %>">
+</form>
