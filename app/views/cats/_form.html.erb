@@ -1,10 +1,5 @@
-<!-- Things we have to change:
-    - Action
-    - Verb
--->
-
 <% _action = cat.id ? cat_url(cat) : cats_url %>
-<% _verb = cat.id ? 'PATCH' : 'POST' %>
+<% _verb = cat.id ? "PATCH" : "POST" %>
 
 <% if flash[:errors] %>
   <ul>
@@ -15,7 +10,7 @@
 <% end %>
 
 <form action="<%= _action %>" method="POST">
-  <input type='hidden' name='_method' value='<%= _verb %>'>
+  <input type="hidden" name="_method" value="<%= _verb %>">
 
   <label>Name:
     <input type="text" name="cat[name]" value=" <%= cat.name %> " />
@@ -32,7 +27,7 @@
 
   <label>Color:
     <select name="cat[color]" />
-      <option disabled>--Pick a color!!--</option>
+      <option disabled>--Pick a color--</option>
       <% Cat::COLOR.each do |color| %>
         <option value="<%= color %>" <%= cat.color == color ? "selected" : "" %>> <%= color %> </option>
       <% end %>

@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-      <th><h4>All about <%= @cat.name %></h4></th>
+      <th><h3>All about <%= @cat.name %></h3></th>
   </tr>
   <tr>
     <td> Age </td>
@@ -26,4 +26,28 @@
   </tr>
 </table>
 
+  <br>
+  <h3>Here are all the current requests for <%= @cat.name %></h3>
+  <% requests = CatRentalRequest %>
+  <%  .where(cat_id: @cat.id) %>
+  <%  .order(:start_date) %>
+
+  <% if requests.empty? %>
+  <p>There are no requests for the cat yet! :)</p>
+  <% else %>
+  <ul>
+    <% requests.each do |request| %>
+    <li><%= request.start_date %> to <%= request.end_date %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <!--
+  THREE OPTIONS:
+  Active Record
+  Pass in an instance variable  probably not this one.
+  SQL. probably not this one -->
+
+  <%=  %>
+<%= link_to "Request this cat!", new_cat_rental_request_url %>
 <%= link_to "Edit this cat!", edit_cat_url(@cat) %>

@@ -22,7 +22,6 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
-    # fail
     if @cat.save
       redirect_to cat_url(@cat)
     else
