@@ -37,17 +37,16 @@
   <% else %>
   <ul>
     <% requests.each do |request| %>
-    <li><%= request.start_date %> to <%= request.end_date %></li>
+      <li>
+        <%= request.start_date %> to <%= request.end_date %> : <%= request.status %>
+        <% if request.pending? %><%= button_to "Approve meow", approve_url %><% end %>
+      </li>
     <% end %>
   </ul>
   <% end %>
 
-  <!--
-  THREE OPTIONS:
-  Active Record
-  Pass in an instance variable  probably not this one.
-  SQL. probably not this one -->
 
-  <%=  %>
+<br>
 <%= link_to "Request this cat!", new_cat_rental_request_url %>
+<br>
 <%= link_to "Edit this cat!", edit_cat_url(@cat) %>

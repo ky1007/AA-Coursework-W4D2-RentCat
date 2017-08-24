@@ -8,6 +8,25 @@ class CatRentalRequest < ApplicationRecord
     foreign_key: :cat_id,
     class_name: :Cat
 
+  def approve!
+    if self.status == "PENDING"
+      CatRentalRequest.transaction do
+        self.status = "APPROVED"
+        overlapping_requests.each do |request|
+          request.status = "DENIED"
+        end
+      end
+    end
+  end
+
+  def deny!
+    self.status = "DENIED"
+  end
+
+  def pending?
+    self.status == "PENDING"
+  end
+
   def overlapping_requests
     CatRentalRequest
       .where.not(id: self.id)
